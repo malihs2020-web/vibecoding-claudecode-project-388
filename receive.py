@@ -42,8 +42,13 @@ def load_dotenv(path):
 def load_state():
     if not os.path.isfile(STATE_PATH):
         return {"last_update_id": 0}
-    with open(STATE_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with open(STATE_PATH, "r", encoding="utf-8") as f:
+            state = json.load(f)
+        state["last_update_id"]
+        return state
+    except (ValueError, KeyError, OSError):
+        return {"last_update_id": 0}
 
 
 def save_state(state):
