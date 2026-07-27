@@ -113,7 +113,7 @@ def main():
     if init_mode:
         print(f"Initialized. last_update_id={max_update_id}")
     else:
-        print(json.dumps(messages, ensure_ascii=False))
+        print(json.dumps(messages))
 
 
 if __name__ == "__main__":
