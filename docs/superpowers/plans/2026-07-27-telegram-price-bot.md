@@ -6,6 +6,8 @@
 
 **Architecture:** A new standalone script `receive.py` polls Telegram's `getUpdates` API and tracks which messages have already been handled in a local, gitignored state file. A new skill `telegram-price-bot` starts a fixed-interval `/loop` (every 3 minutes) that calls `receive.py`, and for every new message runs the same store-search steps already documented in `tracker/SKILL.md` (fallback web search + Ozon/Яндекс Маркет/Wildberries via browser, minus the fixed-URL-list and history/baseline machinery, which are specific to the Premier dog food product), then replies via the existing `send.py`.
 
+> Amended after live end-to-end testing: use dynamic `/loop` (no fixed interval) instead — see the committed SKILL.md and the design spec, which had already specified ScheduleWakeup / dynamic mode correctly.
+
 **Tech Stack:** Python 3 (stdlib only — `json`, `urllib`), Telegram Bot API (`getUpdates`, `sendMessage`), Claude Code `Skill`/`ScheduleWakeup`/`WebSearch`/`WebFetch`/`mcp__claude-in-chrome__*` tools.
 
 ## Global Constraints
